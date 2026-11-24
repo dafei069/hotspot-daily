@@ -83,10 +83,15 @@ def main():
         "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
         "items": all_items[:10],
     }
-    os.makedirs("data", exist_ok=True)
-    with open("data/hot.json", "w", encoding="utf-8") as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
-    print(f"[ok] 抓取到 {len(all_items[:10])} 条热点 -> data/hot.json")
+    def save(path):
+        folder = os.path.dirname(path)
+        if folder:
+            os.makedirs(folder, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(result, f, ensure_ascii=False, indent=2)
+    save("hot.json")
+    save("data/hot.json")
+    print(f"[ok] 抓取到 {len(all_items[:10])} 条热点 -> hot.json")
     for i, it in enumerate(result["items"], 1):
         print(f"  {i:>2}. [{it['platform']}] {it['title']}")
 

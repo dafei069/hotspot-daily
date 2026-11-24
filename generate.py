@@ -77,7 +77,8 @@ def fallback(topic):
 def main():
     if not API_KEY:
         print("[warn] 未设置 LLM_API_KEY，将全部使用降级简介。")
-    with open("data/hot.json", encoding="utf-8") as f:
+    hot_path = "hot.json" if os.path.exists("hot.json") else "data/hot.json"
+    with open(hot_path, encoding="utf-8") as f:
         hot = json.load(f)
 
     posts, failed = [], 0
@@ -105,9 +106,15 @@ def main():
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
         "posts": posts,
     }
-    with open("data/posts.json", "w", encoding="utf-8") as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
-    print(f"[ok] 生成 {len(posts)} 篇（降级 {failed} 篇）-> data/posts.json")
+    def save(path):
+        folder = os.path.dirname(path)
+        if folder:
+            os.makedirs(folder, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(result, f, ensure_ascii=False, indent=2)
+    save("posts.json")
+    save("data/posts.json")
+    print(f"[ok] 生成 {len(posts)} 篇（降级 {failed} 篇）-> posts.json")
 
 
 if __name__ == "__main__":

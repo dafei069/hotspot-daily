@@ -92,8 +92,8 @@ async function doCopy(i){
   const t=$('#toast'); t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),1600);
 }
-fetch('data/posts.json?t='+Date.now()).then(r=>r.json()).then(render)
-  .catch(()=>{ $('#list').innerHTML='<div class="empty">加载失败，请确认 data/posts.json 已生成</div>'; });
+fetch('posts.json?t='+Date.now()).then(r=>r.json()).then(render)
+  .catch(()=>{ $('#list').innerHTML='<div class="empty">加载失败，请确认 posts.json 已生成</div>'; });
 </script>
 </body>
 </html>
