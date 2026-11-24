@@ -1,0 +1,44 @@
+name: 每日热点美文
+
+# 每天北京时间 07:30 自动运行（UTC 23:30）
+on:
+  schedule:
+    - cron: '30 23 * * *'
+  workflow_dispatch:  # 允许在网页手动点按钮立即运行
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: pip install requests
+
+      - name: 1. 抓取热点并去重取 10 条
+        run: python scripts/fetch_hot.py
+
+      - name: 2. AI 改写为美文
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+        run: python scripts/generate.py
+
+      - name: 3. 发布数据到网页目录
+        run: cp data/posts.json web/data/posts.json
+
+      - name: 4. 提交更改（网站自动更新）
+        run: |
+          git config user.name "bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "自动更新 $(date +%F)"
+          git push
