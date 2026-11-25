@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#3a1c71"/><stop offset="1" stop-color="#d76d77"/>
+      <stop offset="0" stop-color="#c31432"/><stop offset="1" stop-color="#240b36"/>
     </linearGradient>
   </defs>
   <rect width="900" height="500" fill="url(#g)"/>
   <circle cx="790" cy="90" r="150" fill="#f04142" opacity="0.28"/>
   <circle cx="820" cy="420" r="90" fill="#fff" opacity="0.06"/>
   <rect x="60" y="52" width="10" height="44" rx="5" fill="#f04142"/>
-  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">社会 · 头条</text>
-  <text x="60" y="250" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">上海就陈吉宁被查表态</text>
+  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">突发 · 头条</text>
+  <text x="60" y="219" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">上海高层人事调整引关注</text><text x="60" y="281" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">，反腐持续释放强烈信号</text>
   <text x="60" y="452" fill="#fff" font-size="22" opacity="0.6" font-family="PingFang SC,Microsoft YaHei,sans-serif">每日热点美文 · NO.03</text>
 </svg>
