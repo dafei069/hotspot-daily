@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0f3443"/><stop offset="1" stop-color="#34e89e"/>
+      <stop offset="0" stop-color="#5f2c82"/><stop offset="1" stop-color="#49a09d"/>
     </linearGradient>
   </defs>
   <rect width="900" height="500" fill="url(#g)"/>
   <circle cx="790" cy="90" r="150" fill="#fb7299" opacity="0.28"/>
   <circle cx="820" cy="420" r="90" fill="#fff" opacity="0.06"/>
   <rect x="60" y="52" width="10" height="44" rx="5" fill="#fb7299"/>
-  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">财经 · B站</text>
-  <text x="60" y="188" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">当赛博朋克照进荒野，《</text><text x="60" y="250" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">明日方舟：终末地》新影</text><text x="60" y="312" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">像释放硬核建设张力</text>
+  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">生活 · B站</text>
+  <text x="60" y="188" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">看《明日方舟：终末地》</text><text x="60" y="250" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">群像：我们到底在等待什</text><text x="60" y="312" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">么？</text>
   <text x="60" y="452" fill="#fff" font-size="22" opacity="0.6" font-family="PingFang SC,Microsoft YaHei,sans-serif">每日热点美文 · NO.07</text>
 </svg>

@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#5f2c82"/><stop offset="1" stop-color="#49a09d"/>
+      <stop offset="0" stop-color="#c31432"/><stop offset="1" stop-color="#240b36"/>
     </linearGradient>
   </defs>
   <rect width="900" height="500" fill="url(#g)"/>
   <circle cx="790" cy="90" r="150" fill="#2e69ff" opacity="0.28"/>
   <circle cx="820" cy="420" r="90" fill="#fff" opacity="0.06"/>
   <rect x="60" y="52" width="10" height="44" rx="5" fill="#2e69ff"/>
-  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">生活 · 掘金</text>
-  <text x="60" y="157" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">Jetpack Com</text><text x="60" y="219" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">pose 1.13 发</text><text x="60" y="281" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">布，憋了这么久终有交代</text><text x="60" y="343" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">了</text>
+  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">突发 · 掘金</text>
+  <text x="60" y="157" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">Jetpack Com</text><text x="60" y="219" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">pose 1.13 正</text><text x="60" y="281" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">式发布，安卓开发者终于</text><text x="60" y="343" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">等到了</text>
   <text x="60" y="452" fill="#fff" font-size="22" opacity="0.6" font-family="PingFang SC,Microsoft YaHei,sans-serif">每日热点美文 · NO.08</text>
 </svg>
