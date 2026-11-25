@@ -13,13 +13,11 @@ def bing_images(q):
     except Exception as e:
         return [f"ERR:{type(e).__name__}"]
 
-def baidu_images(q):
+def so_images(q):
+    """360图片搜索：从 HTML 提取真实图片 URL。"""
     try:
-        r = requests.get("https://image.baidu.com/search/index",
-                         params={"tn": "baiduimage", "word": q}, headers=H, timeout=15)
-        urls = re.findall(r'"objURL":"(.*?)"', r.text)
-        if not urls:
-            urls = re.findall(r'"middleURL":"(.*?)"', r.text)
+        r = requests.get("https://image.so.com/i", params={"q": q}, headers=H, timeout=15)
+        urls = re.findall(r'"img":"(.*?)"', r.text)
         return [u.replace("\\/", "/") for u in urls[:3]]
     except Exception as e:
         return [f"ERR:{type(e).__name__}"]
@@ -51,11 +49,9 @@ def main():
     items = json.load(open("hot.json", encoding="utf-8"))["items"]
     for it in items[:6]:
         q = it["title"][:20]
-        bing = bing_images(q)
-        baidu = baidu_images(q)
+        so = so_images(q)
         print(f"\n[{it['platform']}] {q}", flush=True)
-        print(f"  bing[0]: {check_img(bing[0]) if bing else 'EMPTY'} | {str(bing[0])[:70] if bing else ''}", flush=True)
-        print(f"  baidu[0]: {check_img(baidu[0]) if baidu else 'EMPTY'} | {str(baidu[0])[:70] if baidu else ''}", flush=True)
+        print(f"  360[0]: {check_img(so[0]) if so else 'EMPTY'} | {str(so[0])[:70] if so else ''}", flush=True)
         if it["platform"] == "B站":
             bv = bilibili_cover(it["url"])
             print(f"  bili-api: {check_img(bv)} | {str(bv)[:70]}", flush=True)
