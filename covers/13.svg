@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#42275a"/><stop offset="1" stop-color="#734b6d"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="500" fill="url(#g)"/>
+  <circle cx="790" cy="90" r="150" fill="#e6162d" opacity="0.28"/>
+  <circle cx="820" cy="420" r="90" fill="#fff" opacity="0.06"/>
+  <rect x="60" y="52" width="10" height="44" rx="5" fill="#e6162d"/>
+  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">文化 · 微博</text>
+  <text x="60" y="188" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">王牌对王牌第十季阵容曝</text><text x="60" y="250" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">光：情怀牌打下去，综艺</text><text x="60" y="312" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">该给观众新的期待了吗？</text>
+  <text x="60" y="452" fill="#fff" font-size="22" opacity="0.6" font-family="PingFang SC,Microsoft YaHei,sans-serif">每日热点美文 · NO.13</text>
+</svg>
