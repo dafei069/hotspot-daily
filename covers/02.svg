@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#42275a"/><stop offset="1" stop-color="#734b6d"/>
+      <stop offset="0" stop-color="#1a2980"/><stop offset="1" stop-color="#26d0ce"/>
     </linearGradient>
   </defs>
   <rect width="900" height="500" fill="url(#g)"/>
   <circle cx="790" cy="90" r="150" fill="#0066ff" opacity="0.28"/>
   <circle cx="820" cy="420" r="90" fill="#fff" opacity="0.06"/>
   <rect x="60" y="52" width="10" height="44" rx="5" fill="#0066ff"/>
-  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">文化 · 知乎</text>
-  <text x="60" y="188" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">中韩自贸协定升级：韩流</text><text x="60" y="250" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">影视进中国，追剧党能等</text><text x="60" y="312" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">到2026年吗？</text>
+  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">国际 · 知乎</text>
+  <text x="60" y="157" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">中韩自贸协定升级：韩国</text><text x="60" y="219" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">影视游戏有望“零关税”</text><text x="60" y="281" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">入境，我们还能买到盗版</text><text x="60" y="343" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">吗？</text>
   <text x="60" y="452" fill="#fff" font-size="22" opacity="0.6" font-family="PingFang SC,Microsoft YaHei,sans-serif">每日热点美文 · NO.02</text>
 </svg>
