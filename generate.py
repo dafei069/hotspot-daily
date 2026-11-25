@@ -2,7 +2,8 @@
 """把热点改写成适合头条/公众号发表的短美文，输出 posts.json。
 兼容任意 OpenAI 格式的国产大模型：DeepSeek / 通义 / 智谱 / 硅基流动等。
 API Key 从环境变量 LLM_API_KEY 读取，绝不写进代码。
-每篇配一张按平台色+关键词生成的 SVG 封面图（存 covers/，不依赖外部图床）。
+封面策略：优先抓原文真实新闻配图（本地化存 covers/，不外链防盗链），
+抓不到则回退到按平台色+关键词生成的 SVG 封面，保证不断更。
 """
 import json
 import os
@@ -127,6 +128,77 @@ def make_cover(title, platform, idx):
 
 def esc_xml(s):
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+
+
+# ---------- 真实新闻配图：优先抓取，失败回退 SVG ----------
+IMG_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
+    "Accept-Language": "zh-CN,zh;q=0.9",
+}
+
+
+def _og_image_from_html(html):
+    """从 HTML 里提取 og:image / twitter:image 的真实图片 URL。"""
+    pats = [
+        r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)',
+        r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
+        r'<meta[^>]+name=["\']twitter:image["\'][^>]+content=["\']([^"\']+)',
+    ]
+    for p in pats:
+        m = re.search(p, html, re.I)
+        if m:
+            u = m.group(1).strip()
+            if u.startswith("//"):
+                u = "https:" + u
+            return u
+    return None
+
+
+def find_real_image(topic):
+    """返回该热点的真实配图 URL，找不到返回 None。B站走封面 API。"""
+    url, pf = topic.get("url", ""), topic.get("platform", "")
+    if not url:
+        return None
+    # B站：视频封面 API 最可靠
+    if pf == "B站":
+        m = re.search(r"(BV[0-9A-Za-z]{10})", url)
+        if m:
+            try:
+                d = requests.get(
+                    f"https://api.bilibili.com/x/web-interface/view?bvid={m.group(1)}",
+                    headers=IMG_HEADERS, timeout=12).json()
+                pic = (d.get("data") or {}).get("pic")
+                if pic:
+                    return pic
+            except Exception:
+                pass
+    # 通用：抓原文页 og:image
+    try:
+        r = requests.get(url, headers=IMG_HEADERS, timeout=15, allow_redirects=True)
+        return _og_image_from_html(r.text)
+    except Exception:
+        return None
+
+
+def save_real_image(url, idx):
+    """下载真实图到 covers/NN.jpg。成功返回相对路径，失败返回 None。"""
+    try:
+        r = requests.get(url, headers=IMG_HEADERS, timeout=20, stream=True)
+        ct = r.headers.get("Content-Type", "")
+        cl = int(r.headers.get("Content-Length") or 0)
+        # 必须是图片，且大于 15KB（过滤网站 logo 小图），小于 8MB
+        if "image" not in ct or cl < 15000 or cl > 8_000_000:
+            return None
+        path = f"covers/{idx:02d}.jpg"
+        with open(path, "wb") as f:
+            for chunk in r.iter_content(8192):
+                f.write(chunk)
+        if os.path.getsize(path) < 15000:
+            os.remove(path)
+            return None
+        return path
+    except Exception:
+        return None
 
 
 def call_llm(topic, max_retry=3):
@@ -294,9 +366,17 @@ def main():
             body = body[:cut].rstrip("。，, ") + "。" + ENDING_QUESTIONS[(i - 1) % len(ENDING_QUESTIONS)]
             print(f"      结尾套话已替换为轮换提问")
 
-        cover_path = f"covers/{i:02d}.svg"
-        with open(cover_path, "w", encoding="utf-8") as f:
-            f.write(make_cover(title, topic["platform"], i))
+        # 封面：优先真实新闻配图，抓不到则回退 SVG
+        cover_path, real_hit = None, False
+        img_url = find_real_image(topic)
+        if img_url:
+            cover_path = save_real_image(img_url, i)
+            real_hit = bool(cover_path)
+        if not cover_path:
+            cover_path = f"covers/{i:02d}.svg"
+            with open(cover_path, "w", encoding="utf-8") as f:
+                f.write(make_cover(title, topic["platform"], i))
+        print(f"      封面: {'真实图' if real_hit else 'SVG回退'} -> {cover_path}")
 
         posts.append({
             "title": title,
