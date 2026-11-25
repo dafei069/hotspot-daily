@@ -169,8 +169,11 @@ def call_llm(topic, max_retry=3):
         except Exception as e:
             last_err = e
             if attempt < max_retry:
-                wait = 2 ** attempt  # 1s, 2s, 4s 指数退避，缓解限流
-                print(f"      第{attempt+1}次失败，{wait}s后重试: {str(e)[:50]}")
+                # 限流(429)用长退避，让窗口恢复；其他错误用短退避
+                is_429 = "429" in str(e) or "Too Many Requests" in str(e)
+                wait = (10 * (2 ** attempt)) if is_429 else (2 ** attempt)
+                tag = "限流" if is_429 else "错误"
+                print(f"      第{attempt+1}次{tag}，{wait}s后重试: {str(e)[:50]}")
                 time.sleep(wait)
     raise last_err
 
@@ -303,7 +306,7 @@ def main():
             "platform": topic["platform"],
             "cover": cover_path,
         })
-        time.sleep(0.5)
+        time.sleep(2)  # 拉开请求间隔，降低触发智谱免费额度限流的概率
 
     result = {
         "updated_at": hot["updated_at"],
