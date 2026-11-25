@@ -7,26 +7,28 @@
 <style>
   :root{--bg:#f6f7f9;--card:#fff;--ink:#1f2329;--sub:#6b7280;--line:#e8eaed;--brand:#c0392b;--brand2:#e74c3c;--tag:#fdf2f0}
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.75 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
   .wrap{max-width:860px;margin:0 auto;padding:28px 18px 60px}
   header{text-align:center;padding:18px 0 26px}
   header h1{margin:0 0 6px;font-size:26px;letter-spacing:1px}
   header p{margin:0;color:var(--sub);font-size:13px}
   .day{display:inline-block;margin-top:12px;background:var(--tag);color:var(--brand);border-radius:20px;padding:3px 14px;font-size:12px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.03)}
-  .meta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);margin-bottom:8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+  .cover{width:100%;height:auto;display:block;background:#1f2d3d}
+  .inner{padding:20px 22px}
+  .meta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);margin-bottom:8px;flex-wrap:wrap}
   .no{background:var(--brand);color:#fff;width:22px;height:22px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:12px}
   .plat{background:#f1f3f5;border-radius:4px;padding:1px 7px}
-  .card h2{font-size:18px;margin:6px 0 10px;line-height:1.5}
+  .card h2{font-size:19px;margin:4px 0 12px;line-height:1.5}
   .body{white-space:pre-wrap;color:#374151}
-  .body.fold{max-height:96px;overflow:hidden;position:relative}
-  .body.fold::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40px;background:linear-gradient(transparent,#fff)}
-  .acts{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .body.fold{max-height:150px;overflow:hidden;position:relative}
+  .body.fold::after{content:"";position:absolute;left:0;right:0;bottom:0;height:48px;background:linear-gradient(transparent,#fff)}
+  .acts{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center}
   button{border:0;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;font-weight:600}
   .copy{background:var(--brand);color:#fff}
   .copy:hover{background:var(--brand2)}
   .more{background:#f1f3f5;color:#374151}
-  a.src{color:var(--sub);font-size:12px;text-decoration:none;margin-left:auto;align-self:center}
+  a.src{color:var(--sub);font-size:12px;text-decoration:none;margin-left:auto}
   a.src:hover{color:var(--brand)}
   footer{text-align:center;color:#9ca3af;font-size:12px;margin-top:30px;line-height:1.9}
   .toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:#1f2329;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:9}
@@ -44,7 +46,7 @@
   <main id="list"><div class="empty">正在加载今日内容…</div></main>
   <footer>
     内容由 AI 辅助生成，请人工核对事实后再发布<br>
-    素材来源为公开热榜 · 仅供个人学习参考
+    素材来源为公开热榜 · 封面为自动生成 · 仅供个人学习参考
   </footer>
 </div>
 <div class="toast" id="toast">已复制，去粘贴发布吧</div>
@@ -59,17 +61,20 @@ function render(data){
   if(!POSTS.length){ $('#list').innerHTML = '<div class="empty">今日暂无内容</div>'; return; }
   $('#list').innerHTML = POSTS.map((p,i)=>`
     <article class="card">
-      <div class="meta">
-        <span class="no">${i+1}</span>
-        <span class="plat">${p.platform||'热点'}</span>
-        <span>${(p.body||'').length} 字</span>
-      </div>
-      <h2>${esc(p.title)}</h2>
-      <div class="body fold" id="b${i}">${esc(p.body)}</div>
-      <div class="acts">
-        <button class="copy" onclick="doCopy(${i})">一键复制全文</button>
-        <button class="more" onclick="toggle(${i},this)">展开全文</button>
-        ${p.url?`<a class="src" href="${esc(p.url)}" target="_blank" rel="noopener">查看原始热点 ↗</a>`:''}
+      ${p.cover?`<img class="cover" src="${esc(p.cover)}" alt="${esc(p.title)}" loading="lazy">`:''}
+      <div class="inner">
+        <div class="meta">
+          <span class="no">${i+1}</span>
+          <span class="plat">${p.platform||'热点'}</span>
+          <span>${(p.body||'').length} 字</span>
+        </div>
+        <h2>${esc(p.title)}</h2>
+        <div class="body fold" id="b${i}">${esc(p.body)}</div>
+        <div class="acts">
+          <button class="copy" onclick="doCopy(${i})">一键复制全文</button>
+          <button class="more" onclick="toggle(${i},this)">展开全文</button>
+          ${p.url?`<a class="src" href="${esc(p.url)}" target="_blank" rel="noopener">查看原始热点 ↗</a>`:''}
+        </div>
       </div>
     </article>`).join('');
 }
