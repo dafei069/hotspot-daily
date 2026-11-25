@@ -129,7 +129,7 @@ def esc_xml(s):
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
-def call_llm(topic, max_retry=2):
+def call_llm(topic, max_retry=3):
     """调用大模型，返回 (title, body)。失败重试 max_retry 次，仍失败才抛异常降级。"""
     user = (
         f"热点标题：{topic['title']}\n"
@@ -159,7 +159,7 @@ def call_llm(topic, max_retry=2):
                 headers={"Authorization": f"Bearer {API_KEY}",
                          "Content-Type": "application/json"},
                 json=payload,
-                timeout=45,
+                timeout=120,
             )
             resp.raise_for_status()
             content = resp.json()["choices"][0]["message"]["content"] or ""
