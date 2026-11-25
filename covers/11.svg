@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1a2980"/><stop offset="1" stop-color="#26d0ce"/>
+      <stop offset="0" stop-color="#42275a"/><stop offset="1" stop-color="#734b6d"/>
     </linearGradient>
   </defs>
   <rect width="900" height="500" fill="url(#g)"/>
   <circle cx="790" cy="90" r="150" fill="#0078d4" opacity="0.28"/>
   <circle cx="820" cy="420" r="90" fill="#fff" opacity="0.06"/>
   <rect x="60" y="52" width="10" height="44" rx="5" fill="#0078d4"/>
-  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">国际 · IT之家</text>
-  <text x="60" y="188" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">华为Mate 90 A</text><text x="60" y="250" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">ir将回归，麒麟902</text><text x="60" y="312" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">0能否承载轻薄期待？</text>
+  <text x="86" y="84" fill="#fff" font-size="26" opacity="0.9" font-family="PingFang SC,Microsoft YaHei,sans-serif">文化 · IT之家</text>
+  <text x="60" y="157" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">华为 Mate 90 </text><text x="60" y="219" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">Air 细节曝光：轻薄</text><text x="60" y="281" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">机身换芯，这波妥协很清</text><text x="60" y="343" fill="#fff" font-size="42" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">醒</text>
   <text x="60" y="452" fill="#fff" font-size="22" opacity="0.6" font-family="PingFang SC,Microsoft YaHei,sans-serif">每日热点美文 · NO.11</text>
 </svg>
